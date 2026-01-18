@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bullet Journal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <div>
+          <p class="app__eyebrow">Bullet Journal</p>
+          <h1>Dein Tagesfokus auf einen Blick</h1>
+          <p class="app__subtitle">
+            Füge Einträge hinzu, markiere erledigte Aufgaben und behalte deine Prioritäten im Blick.
+          </p>
+        </div>
+        <div class="app__summary" aria-live="polite">
+          <div>
+            <span class="summary__value" id="entry-count">0</span>
+            <span class="summary__label">Einträge</span>
+          </div>
+          <div>
+            <span class="summary__value" id="done-count">0</span>
+            <span class="summary__label">Erledigt</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="composer" aria-label="Neuer Eintrag">
+        <form id="entry-form">
+          <label class="field">
+            <span>Titel</span>
+            <input
+              type="text"
+              name="title"
+              placeholder="z. B. Kundenmail beantworten"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label class="field">
+            <span>Kategorie</span>
+            <select name="category">
+              <option value="Aufgabe">Aufgabe</option>
+              <option value="Termin">Termin</option>
+              <option value="Notiz">Notiz</option>
+              <option value="Idee">Idee</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Priorität</span>
+            <select name="priority">
+              <option value="Hoch">Hoch</option>
+              <option value="Mittel" selected>Mittel</option>
+              <option value="Niedrig">Niedrig</option>
+            </select>
+          </label>
+          <label class="field field--stretch">
+            <span>Details</span>
+            <input type="text" name="details" placeholder="Optionale Details" />
+          </label>
+          <button type="submit" class="button">Eintrag hinzufügen</button>
+        </form>
+      </section>
+
+      <section class="entries" aria-label="Einträge">
+        <div class="entries__controls">
+          <div class="pill-group" role="tablist" aria-label="Filter">
+            <button class="pill" data-filter="all" aria-pressed="true">Alle</button>
+            <button class="pill" data-filter="open" aria-pressed="false">Offen</button>
+            <button class="pill" data-filter="done" aria-pressed="false">Erledigt</button>
+          </div>
+          <button class="ghost" id="clear-done">Erledigte entfernen</button>
+        </div>
+        <ul id="entry-list" class="entry-list" aria-live="polite"></ul>
+      </section>
+    </main>
+
+    <template id="entry-template">
+      <li class="entry" data-id="">
+        <button class="entry__toggle" aria-label="Eintrag erledigt markieren"></button>
+        <div class="entry__content">
+          <div class="entry__meta">
+            <span class="entry__category"></span>
+            <span class="entry__priority"></span>
+          </div>
+          <h3 class="entry__title"></h3>
+          <p class="entry__details"></p>
+        </div>
+        <button class="entry__delete" aria-label="Eintrag löschen">✕</button>
+      </li>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
